@@ -1,0 +1,5 @@
+media
+*.pyc
+api/migrations
+db.sqlite3
+
