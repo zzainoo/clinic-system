@@ -90,8 +90,7 @@ class Registers(models.Model):
     firstname = models.CharField(max_length=200, verbose_name=_('الاسم الاول'))
     lasttname = models.CharField(max_length=200, verbose_name=_('الاسم الاخير'))
     phone = models.BigIntegerField(verbose_name=_('رقم الهاتف'))
-    email = models.CharField(max_length=200, verbose_name=_('البريد الالكتروني'))
-    address = models.CharField(max_length=200, verbose_name=_('العنوان'))
+    address = models.CharField(max_length=200, verbose_name=_('العنوان'),blank=True,null=True)
     gender = models.CharField(max_length=200, choices=GENDER, default='ذكر', verbose_name=_('الجنس'))
 
     class Meta:
