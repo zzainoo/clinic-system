@@ -25,7 +25,8 @@ class Users(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.code = random.randint(0, 999999)
+        if not self.code:
+            self.code = random.randint(0, 999999)
         super().save(*args, **kwargs)
 
 
@@ -45,7 +46,8 @@ class Libs(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.code = random.randint(0, 999999)
+        if not self.code:
+            self.code = random.randint(0, 999999)
         super().save(*args, **kwargs)
 
 
@@ -54,7 +56,7 @@ class Reports(models.Model):
     lib = models.ForeignKey(Libs, on_delete=models.CASCADE, verbose_name=_('المختبر'))
     file = models.FileField(upload_to="uploads/%Y/%m/%d/%s/%M", verbose_name=_('الملف'))
     name = models.CharField(max_length=200, verbose_name=_('عنوان التقرير'))
-    data = models.DateField(auto_now=True)
+    data = models.DateField(auto_now=True, verbose_name=_('التاريخ'))
 
     class Meta:
         verbose_name = _('التقارير')
@@ -69,7 +71,7 @@ class Offer(models.Model):
     descrp = models.TextField(verbose_name=_('الوصف'))
     price = models.FloatField(verbose_name=_('السعر'))
     image = models.ImageField(upload_to="uploads/%Y/%m/%d/%s/%M", verbose_name=_('الصورة'))
-    date = models.DateField(auto_now=True)
+    date = models.DateField(auto_now=True, verbose_name=_('التاريخ'))
 
     class Meta:
         verbose_name = _('العروض')
@@ -92,6 +94,7 @@ class Registers(models.Model):
     phone = models.BigIntegerField(verbose_name=_('رقم الهاتف'))
     address = models.CharField(max_length=200, verbose_name=_('العنوان'),blank=True,null=True)
     gender = models.CharField(max_length=200, choices=GENDER, default='ذكر', verbose_name=_('الجنس'))
+    date = models.DateField(auto_now_add=True,verbose_name=_('تاريخ التسجيل'))
 
     class Meta:
         verbose_name = _('الحجوزات')
@@ -99,6 +102,38 @@ class Registers(models.Model):
 
     def __str__(self):
         return self.firstname
+
+
+
+class Train(models.Model):
+    name = models.CharField(max_length=200, verbose_name=_('الاسم'))
+    phone = models.IntegerField( verbose_name=_('رقم الهاتف'))
+    school = models.CharField(max_length=200, verbose_name=_('الكلية \ الجامعة'))
+    grad = models.DateField(verbose_name=_('سنة التخرج'))
+    age = models.IntegerField( verbose_name=_('العمر'))
+    location = models.CharField(max_length=200, verbose_name=_('العنوان'))
+    period = models.CharField(max_length=200, verbose_name=_('مدة الدورة'))
+    date = models.DateField(auto_now_add=True, verbose_name=_('تاريخ الطلب'))
+
+    class Meta:
+        verbose_name = _('المتدربين')
+        verbose_name_plural = _('المتدربين')
+    def __str__(self):
+        return self.name
+
+class Housecheck(models.Model):
+    name =  models.CharField(max_length=200, verbose_name=_('الاسم'))
+    age = models.IntegerField( verbose_name=_('العمر'))
+    phone = models.IntegerField( verbose_name=_('رقم الهاتف'))
+    date = models.DateField( verbose_name=_('تاريخ طلب الزيارة'))
+    image = models.ImageField(upload_to='upload/%Y/%S',blank=True,null=True, verbose_name=_('مرفق الصورة'))
+
+    class Meta:
+        verbose_name = _('طلبات الزيارة المنزلية')
+        verbose_name_plural = _('طلبات الزيارة المنزلية')
+
+    def __str__(self):
+        return self.name
 
 
 

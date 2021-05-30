@@ -1,8 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import *
 
-
-
 class AccountSer(ModelSerializer):
     class Meta:
         model = Users
@@ -28,3 +26,15 @@ class RegisterSer(ModelSerializer):
     class Meta:
         model = Registers
         fields = '__all__'
+
+class TrainSer(ModelSerializer):
+    class Meta:
+        model = Train
+        fields = '__all__'
+
+class HousecheckSer(ModelSerializer):
+    class Meta:
+        model = Housecheck
+        fields = '__all__'
+
+        

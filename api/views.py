@@ -135,6 +135,16 @@ class Libdet(RetrieveAPIView):
     queryset = Libs.objects.all()
 
 
+class TrainView(CreateAPIView):
+    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication]
+    serializer_class = TrainSer
+
+class HouseView(CreateAPIView):
+    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication]
+    serializer_class = HousecheckSer
+
 
 
 

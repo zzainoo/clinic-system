@@ -11,6 +11,8 @@ urlpatterns = [
     path('updateuser/<int:pk>',UserupdateView.as_view()),
     path('updatelib/<int:pk>',LibupdateView.as_view()),
     path('libname/<int:pk>',Libdet.as_view()),
+    path('addtrain',TrainView.as_view()),
+    path('addhouse',HouseView.as_view()),
 
 ]
 
